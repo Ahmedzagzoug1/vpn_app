@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
               children: [
                 Row(
                   //changed
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     CustomWidget(
                       title: 'Location',
@@ -69,7 +69,7 @@ class HomePage extends StatelessWidget {
                 VpnRoundedButton(),
                 Row(
                   //changed
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     CustomWidget(
                       title: '0 kbps',
@@ -157,31 +157,34 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.all(18),
+              padding: EdgeInsets.all(16),
                decoration:    BoxDecoration(
                 color: Colors.green,
                 shape: BoxShape.circle,
               ),
               child:Container(
-                padding: EdgeInsets.all(18),
+                padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: Colors.redAccent,
                   shape: BoxShape.circle,
                 ),
                 child: Container(
-                  width: ScreenSize.width * 0.14,
-                  height: ScreenSize.height * 0.14,
+                  width: ScreenSize.width * 0.25,
+                  height: ScreenSize.height * 0.25,
                   decoration: BoxDecoration(
                     color: Colors.purpleAccent,
                     shape: BoxShape.circle,
                   ),
                   child: Column(
-                    children: [
-            Icon( Icons.power_settings_new, color: Colors.white, size: 20,),
-            Text('Let\'s Connect', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w400),),
-                    ],
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                                Icon( Icons.power_settings_new, color: Colors.white, size: 20,),
+                                Text('Let\'s Connect', style: TextStyle(color: Colors.white,fontSize: 13, fontWeight: FontWeight.w400),),
+                      ],
+                    ),
                   ),
-                ),
+                
               ) ,
             ),
           ],

@@ -18,37 +18,42 @@ class HomeController extends GetxController {
       return;
     }
     //disconnected
-    if (vpnInfo.value == VpnEngine.DISCONNECTED) {
+    if (vpnconnectionState.value == VpnEngine.DISCONNECTED) {
       final dataConfigVpn =
           Base64Decoder().convert(vpnInfo.value.base64OpenVPNConfigData);
       final configration = Utf8Decoder().convert(dataConfigVpn);
-      final vpnConfigration=VpnConfigration(userName: 'vpn', password: 'vpn',
-       countryName: vpnInfo.value.countryLongName, config: configration);
-
+      final vpnConfigration = VpnConfigration(
+          userName: 'vpn',
+          password: 'vpn',
+          countryName: vpnInfo.value.countryLongName,
+          config: configration);
+      print('${vpnConfigration.userName.toString()} ahmed');
       await VpnEngine.startVpnConnection(vpnConfigration);
+    }else{
+      print('${vpnconnectionState.value} stopped');
+    await  VpnEngine.stopVpnConnection();
     }
+  }
 
+  Color get getRoundedVpnButtonColor {
+    switch (vpnconnectionState.value) {
+      case VpnEngine.CONNECTED:
+        return Colors.green;
+      case VpnEngine.DISCONNECTED:
+        return Colors.redAccent;
+      default:
+        return Colors.orangeAccent;
+    }
   }
-Color get getRoundedVpnButtonColor {
-  switch(vpnconnectionState.value){
-   
-    case VpnEngine.CONNECTED:
-      return Colors.green;
-    case VpnEngine.DISCONNECTED:
-      return Colors.redAccent;
-    default:
-      return Colors.orangeAccent;
+
+  String get getRoundedVpnButtonText {
+    switch (vpnconnectionState.value) {
+      case VpnEngine.CONNECTED:
+        return 'Disconnect';
+      case VpnEngine.DISCONNECTED:
+        return 'Let\'s Connect';
+      default:
+        return 'Connection...';
+    }
   }
-}
-String get getRoundedVpnButtonText {
-  switch(vpnconnectionState.value){
-   
-    case VpnEngine.CONNECTED:
-      return 'Disconnect';
-    case VpnEngine.DISCONNECTED:
-      return 'Let\'s Connect';
-    default:
-      return 'Connection...';
-  }
-}
 }

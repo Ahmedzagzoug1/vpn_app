@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vpn_basic_project/app_preferences/app_preferences.dart';
@@ -25,7 +27,6 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           leading: InkWell(
             onTap: () {
-              Get.to(AvailableVpnServersLocationPage());
             },
             child: Icon(Icons.perm_device_info),
           ),
@@ -68,7 +69,7 @@ class HomePage extends StatelessWidget {
                     backgroundImage: (homeController
                             .vpnInfo.value.countryLongName.isNotEmpty)
                         ? AssetImage(
-                            'assets\countryFlags\{${homeController.vpnInfo.value.countryShortName}}.png')
+                            'assets/countryFlags/${homeController.vpnInfo.value.countryShortName.toLowerCase()}.png')
                         : null,
                   ),
                 ),
@@ -136,7 +137,10 @@ class HomePage extends StatelessWidget {
     return Semantics(
       button: true,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+                        Get.to(AvailableVpnServersLocationPage());
+
+        },
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.041),
           height: 62,
@@ -178,7 +182,10 @@ class HomePage extends StatelessWidget {
     return Semantics(
       button: true,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          homeController.connectToVpnNow();
+        },
+        borderRadius: BorderRadius.circular(100),
         child: Column(
           children: [
             Container(
@@ -195,8 +202,8 @@ class HomePage extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 child: Container(
-                  width: screenSize.width * 0.25,
-                  height: screenSize.height * 0.25,
+                  width: screenSize.height * 0.16,
+                  height: screenSize.height * 0.16,
                   decoration: BoxDecoration(
                     color: homeController.getRoundedVpnButtonColor,
                     shape: BoxShape.circle,

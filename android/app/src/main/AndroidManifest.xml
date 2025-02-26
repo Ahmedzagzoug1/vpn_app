@@ -6,7 +6,28 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
+    <uses-permission android:name="BIND_VPN_SERVICE"/>
+    <uses-permission android:name="RECEIVE_BOOT_COMPLETED"/>
+<uses-permission android:name="SYSTEM_ALERT_WINDOW"/>
+<uses-permission android:name ="android.permission.GET_TASKS"/>
+"
+<!--
+android.permission.READ_EXTERNAL_STORAGE
+android.permission.WRITE_EXTERNAL_STORAGE
+android.permission.GET_ACCOUNTS
+android.permission.READ_PHONE_STATE
+android.permission.INTERNET
+android.permission.ACCESS_NETWORK_STATE
+android.permission.GET_TASKS
+android.permission.SYSTEM_ALERT_WINDOW
+android.permission.MODIFY_AUDIO_SETTINGS
+android.permission.WAKE_LOCK
+com.google.android.c2dm.permission.RECEIVE
+org.hola.permission.C2D_MESSAGE
+com.android.browser.permission.READ_HISTORY_BOOKMARKS
+com.android.browser.permission.WRITE_HISTORY_BOOKMARKS
+android.permission.ACCESS_FINE_LOCATION
+-->
     <!-- Ads Permission for Android 12 or higher -->
     <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
     

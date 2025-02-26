@@ -67,7 +67,7 @@ class VpnEngine {
   }
 
   //connection status
-  static Future<String?> vpnStage() async {
+  static Future<String?> vpnStageNow() async {
     try {
       await MethodChannel(methodChannelVpnControl).invokeMethod('stage');
     } catch (e) {
@@ -76,20 +76,12 @@ class VpnEngine {
   }
 
   static Future<bool> vpnConection() async {
-return vpnStage().then((value) => value == 'CONNECTED');//285
+return vpnStageNow().then((value) => value!.toLowerCase() == 'connected');//285
 
   }
   //constants
-  static const String CONNECTED = 'CONNECTED';
-  static const String DISCONNECTED = 'DISCONNECTED';
-  static const String CONNECTING = 'CONNECTING';
-  static const String DISCONNECTING = 'DISCONNECTING';
-  static const String RECONNECTING = 'RECONNECTING';
-  static const String EXITING = 'EXITING';
-  static const String NO_PROCESS = 'NO_PROCESS';
-  static const String RESOLVE = 'RESOLVE';
-  static const String TCP_CONNECT = 'TCP_CONNECT';
-  static const String AUTH_FAILED = 'AUTH_FAILED';
-  static const String NO_NETWORK = 'NO_NETWORK';
-  static const String WAITORBOT = 'WAITORBOT';
+  static const String CONNECTED = 'connected';
+  static const String DISCONNECTED = 'disconnected';
+
+
 }

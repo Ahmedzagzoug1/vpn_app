@@ -1,7 +1,7 @@
 class VpnInfo {
   late String hostName;
-  late int ip;
-  late int ping;
+  late String ip;
+  late String ping;
   late int Speed;
   late String countryLongName;
   late String countryShortName;
@@ -18,15 +18,14 @@ class VpnInfo {
       required this.base64OpenVPNConfigData});
   VpnInfo.fromJson(Map<String, dynamic> json) {
     hostName = json['HostName'] ?? '';
-    ip = json['IP'] ?? 0;
-    ping = json['Ping']??0;
+    ip = json['IP'] ?? '';
+    ping = json['Ping'].toString()??'';
     Speed = json['Speed'] ?? 0;
     countryLongName = json['CountryLong'] ?? '';
     countryShortName = json['CountryShort'] ?? '';
     numVpnSessions = json['NumVpnSessions'] ?? 0;
     base64OpenVPNConfigData = json['OpenVPN_ConfigData_Base64'] ?? '';
   }
-  //#HostName,IP,Score,Ping,Speed,CountryLong,CountryShort,NumVpnSessions,Uptime,TotalUsers,TotalTraffic,LogType,Operator,Message,OpenVPN_ConfigData_Base64
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

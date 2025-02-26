@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vpn_basic_project/app_preferences/app_preferences.dart';
 import 'package:vpn_basic_project/pages/home_page.dart';
-late Size ScreenSize;
+late Size screenSize;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
  await AppPreferences.initHive(); 

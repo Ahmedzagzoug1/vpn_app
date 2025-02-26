@@ -13,9 +13,9 @@ class CustomWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenSize = MediaQuery.sizeOf(context);
+    screenSize = MediaQuery.sizeOf(context);
     return SizedBox(
-      width: ScreenSize.width * 0.25,
+      width: screenSize.width * 0.25,
       child: Column(
         
         children: [

@@ -5,22 +5,28 @@ import 'package:vpn_basic_project/controllers/home_controller.dart';
 import 'package:vpn_basic_project/main.dart';
 import 'package:vpn_basic_project/models/vpn_info.dart';
 import 'package:vpn_basic_project/models/vpn_status.dart';
+import 'package:vpn_basic_project/pages/available_vpn_servers_location_page.dart';
 import 'package:vpn_basic_project/vpn_engine/vpn_engine.dart';
 import 'package:vpn_basic_project/widgets/custom_widget.dart';
 
 class HomePage extends StatelessWidget {
-   HomePage({super.key});
-    final homeController = Get.put(HomeController());
+  HomePage({super.key});
+  final homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
-    ScreenSize = MediaQuery.sizeOf(context);
+    screenSize = MediaQuery.sizeOf(context);
+    VpnEngine.snapshotVpnStage().listen((event) {
+      homeController.vpnconnectionState.value = event;
+    });
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: locationSelectionButtomNavigation(context),
         appBar: AppBar(
           leading: InkWell(
-            onTap: () {},
+            onTap: () {
+              Get.to(AvailableVpnServersLocationPage());
+            },
             child: Icon(Icons.perm_device_info),
           ),
           title: Text('VPN '),
@@ -38,8 +44,8 @@ class HomePage extends StatelessWidget {
         ),
         body:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          Obx(()=>
-             Row(
+          Obx(
+            () => Row(
               //changed
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -51,13 +57,14 @@ class HomePage extends StatelessWidget {
                   RoundedWidgetWithIcon: CircleAvatar(
                     radius: 33,
                     backgroundColor: Colors.redAccent,
-                    child: (homeController.vpnInfo.value.countryLongName.isEmpty)
-                        ? Icon(
-                            Icons.flag_circle_outlined,
-                            color: Colors.white,
-                            size: 30,
-                          )
-                        : null,
+                    child:
+                        (homeController.vpnInfo.value.countryLongName.isEmpty)
+                            ? Icon(
+                                Icons.flag_circle_outlined,
+                                color: Colors.white,
+                                size: 30,
+                              )
+                            : null,
                     backgroundImage: (homeController
                             .vpnInfo.value.countryLongName.isNotEmpty)
                         ? AssetImage(
@@ -83,11 +90,11 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-          Obx(() =>  VpnRoundedButton()),
+          Obx(() => VpnRoundedButton()),
           StreamBuilder<VpnStatus>(
             initialData: VpnStatus(),
-stream: VpnEngine.snapshotVpnStatus(),
-          builder: (context, snapshot) =>    Row(
+            stream: VpnEngine.snapshotVpnStatus(),
+            builder: (context, snapshot) => Row(
               //changed
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -131,7 +138,7 @@ stream: VpnEngine.snapshotVpnStatus(),
       child: InkWell(
         onTap: () {},
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.041),
+          padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.041),
           height: 62,
           color: Colors.redAccent,
           child: Row(
@@ -183,12 +190,13 @@ stream: VpnEngine.snapshotVpnStatus(),
               child: Container(
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: homeController.getRoundedVpnButtonColor.withOpacity(.3),
+                  color:
+                      homeController.getRoundedVpnButtonColor.withOpacity(.3),
                   shape: BoxShape.circle,
                 ),
                 child: Container(
-                  width: ScreenSize.width * 0.25,
-                  height: ScreenSize.height * 0.25,
+                  width: screenSize.width * 0.25,
+                  height: screenSize.height * 0.25,
                   decoration: BoxDecoration(
                     color: homeController.getRoundedVpnButtonColor,
                     shape: BoxShape.circle,

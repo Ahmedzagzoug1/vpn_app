@@ -26,14 +26,14 @@ class AppPreferences {
 
 //save single server
   static VpnInfo get vpnInfoObject =>
-      VpnInfo.fromJson(box_of_hive.get('vpn' ?? "{}"));
+      VpnInfo.fromJson(jsonDecode( box_of_hive.get('vpn' )?? "{}"));
   static set vpnInfoObject(VpnInfo value) =>
       box_of_hive.put('vpn', jsonEncode(value));
 
       //save all servers
   static List<VpnInfo> get vpnInfoList {
     List<VpnInfo> tempVpnList=[];
-   final dataVpn=jsonDecode(box_of_hive.get('vpn_list' ?? "[]"));
+   final dataVpn=jsonDecode( box_of_hive.get('vpn_list' )?? '[]' )??[];
 for (var data in dataVpn) {
 
       tempVpnList.add(VpnInfo.fromJson(data));
